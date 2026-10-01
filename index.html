@@ -1,0 +1,140 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Colab to PDF Guide</title><meta name="description" content="Turn your completed Google Colab notebook into a PDF. Follow five copyable code cells, find your file, download it, and check your submission."><meta property="og:title" content="Colab to PDF Guide"><meta property="og:description" content="A complete student walkthrough with copyable code and PDF download instructions."><meta property="og:type" content="website"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Colab to PDF Guide"><meta name="twitter:description" content="Five code cells. A complete walkthrough from notebook to PDF."><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23155ae9'/%3E%3Cpath d='M11 7h7l5 5v13H11z' fill='none' stroke='white' stroke-width='2'/%3E%3Cpath d='M18 7v6h5M14 17h6M14 21h6' fill='none' stroke='white' stroke-width='2'/%3E%3C/svg%3E"><link rel="stylesheet" href="style.css"><script src="app.js" defer></script></head><body><a class="skip" href="#guide">Skip to guide</a><aside class="sidebar"><div class="brand"><span class="brand-mark">{ }</span><span>Colab to PDF<br><small style="font-size:14px;font-weight:400;color:#56647a">Student guide</small></span></div><div class="nav-label">Follow in order</div><nav aria-label="Guide steps"><a href="#step-1"><span class="nav-number">01</span>Finish & save</a><a href="#step-2"><span class="nav-number">02</span>Download .ipynb</a><a href="#step-3"><span class="nav-number">03</span>Open converter</a><a href="#step-4"><span class="nav-number">04</span>Install tools</a><a href="#step-5"><span class="nav-number">05</span>Upload notebook</a><a href="#step-6"><span class="nav-number">06</span>Add converter</a><a href="#step-7"><span class="nav-number">07</span>Create PDF</a><a href="#step-8"><span class="nav-number">08</span>Find & download</a><a href="#step-9"><span class="nav-number">09</span>Check & submit</a></nav><p class="mobile-title"><a href="#step-4">Jump to code cells</a> · <a href="#step-8">Find your PDF</a> · <a href="#troubleshooting">Troubleshooting</a></p><div class="sidebar-footer"><a href="#troubleshooting">Troubleshooting</a><span>One completed assignment.<br>Five conversion cells.</span></div></aside><main id="guide"><header><div class="eyebrow">Google Colab · Assignment submissions</div><h1>Your notebook, ready<br>to submit as a PDF.</h1><p>Follow each step in order. Copy the code into a separate Colab notebook, then download and check your finished PDF.</p><div class="flow" aria-label="Workflow"><span>Finish & save</span><b>›</b><span>Download .ipynb</span><b>›</b><span>Convert</span><b>›</b><span>Check & submit</span></div></header><section class="step" id="step-1"><div class="step-heading"><span class="step-number">01</span><div><h2>Finish and save your assignment</h2></div></div><div class="step-body"><p>Open your <strong>original assignment notebook</strong> in Google Colab. Answer every required question and complete every exercise.</p><ol><li>Click <strong>Runtime → Run all</strong> and wait for every cell to finish.</li><li>Check that the required answers, tables, and figures are visible. Resolve any red errors.</li><li>Click <strong>File → Save</strong>, or press <strong>Ctrl + S</strong> on Windows / <strong>Command + S</strong> on Mac. Wait for saving to finish.</li></ol><div class="note"><strong>Outputs must be saved in the notebook.</strong>The converter uses the code and outputs already stored in your .ipynb. It does not run your assignment. If “Omit code cell output when saving” is enabled in Colab’s notebook settings, turn it off and save again.</div></div></section><section class="step" id="step-2"><div class="step-heading"><span class="step-number">02</span><div><h2>Download the latest .ipynb</h2></div></div><div class="step-body"><p>In your assignment notebook, select:</p><div class="menu-path">File → Download → Download .ipynb</div><p>Your browser will download a file such as <code>Lab4_EDA_Text_Reviews.ipynb</code>. Remember its location—usually your computer’s <strong>Downloads</strong> folder.</p><div class="note warning"><strong>Use the version you just saved.</strong>Downloading an older notebook can produce a PDF with missing answers or outputs.</div></div></section><section class="step" id="step-3"><div class="step-heading"><span class="step-number">03</span><div><h2>Open a separate conversion notebook</h2></div></div><div class="step-body"><ol><li>Open <a href="https://colab.research.google.com/" target="_blank" rel="noopener noreferrer">Google Colab</a> in a new tab.</li><li>Create a <strong>New notebook</strong>. You can name it <strong>Notebook to PDF Converter</strong>.</li><li>Click <strong>Connect</strong> at the top right, if needed. Use a standard Python runtime; a GPU is unnecessary.</li></ol><p>Keep your completed assignment in its original notebook. In this new notebook, create <strong>five code cells</strong> with <strong>+ Code</strong>. Copy the code below into them in order.</p><div class="note"><strong>How to run each cell</strong>Click the round play button to the left of the cell, or press <strong>Shift + Enter</strong>. Wait until the cell finishes before continuing. Copy the entire code block, including its indentation.</div></div></section><section class="step" id="step-4"><div class="step-heading"><span class="step-number">04</span><div><div class=cell-tag>Conversion notebook · Cell 1</div><h2>Install the conversion tools</h2></div></div><div class="step-body"><p>Paste this into the <strong>first code cell</strong> of the conversion notebook and run it. The first installation can take a few minutes. Installation messages are normal.</p><div class="codebox"><div class="codebar"><span>Cell 1 · Install tools</span><button type="button" class="copy" aria-label="Copy Cell 1 · Install tools">Copy</button></div><pre><code id="code-install">import sys
+import subprocess
+
+subprocess.run(
+    [sys.executable, &quot;-m&quot;, &quot;pip&quot;, &quot;install&quot;, &quot;-q&quot;,
+     &quot;nbformat&quot;, &quot;nbconvert&gt;=7,&lt;8&quot;, &quot;playwright&gt;=1.48,&lt;2&quot;],
+    check=True
+)
+subprocess.run(
+    [sys.executable, &quot;-m&quot;, &quot;playwright&quot;, &quot;install&quot;,
+     &quot;--with-deps&quot;, &quot;chromium&quot;],
+    check=True
+)
+print(&quot;Installation complete. Continue to Cell 2.&quot;)</code></pre></div><div class="result"><div class="result-label">What you should see</div><pre>Installation complete. Continue to Cell 2.</pre></div><p>If the cell ends with a red error, stop and read the <a href="#troubleshooting">troubleshooting section</a> before proceeding.</p></div></section><section class="step" id="step-5"><div class="step-heading"><span class="step-number">05</span><div><div class=cell-tag>Conversion notebook · Cell 2</div><h2>Upload and confirm your notebook</h2></div></div><div class="step-body"><p>Paste this into a <strong>new code cell</strong> and run it.</p><div class="codebox"><div class="codebar"><span>Cell 2 · Upload .ipynb</span><button type="button" class="copy" aria-label="Copy Cell 2 · Upload .ipynb">Copy</button></div><pre><code id="code-upload">from google.colab import files
+from pathlib import Path
+
+uploaded = files.upload()
+notebook_paths = []
+
+for name, data in uploaded.items():
+    if Path(name).suffix.lower() == &quot;.ipynb&quot;:
+        path = Path(&quot;/content&quot;) / Path(name).name
+        path.write_bytes(data)
+        notebook_paths.append(path)
+        print(f&quot;Ready: {path.name}&quot;)
+
+if not notebook_paths:
+    raise ValueError(&quot;No .ipynb uploaded. Run this cell again and select your notebook.&quot;)</code></pre></div><ol><li>Click <strong>Choose Files</strong> in the cell’s output.</li><li>Select the assignment <strong>.ipynb</strong> you downloaded in Step 2.</li><li>Wait for the upload to finish.</li></ol><div class="result"><div class="result-label">What you should see</div><pre>Ready: Lab4_EDA_Text_Reviews.ipynb</pre></div><p>You may select several notebooks if you need to convert a batch. This guide converts the files selected in this upload. If you upload a revised version later, rerun Cells 2, 4, and 5.</p></div></section><section class="step" id="step-6"><div class="step-heading"><span class="step-number">06</span><div><div class=cell-tag>Conversion notebook · Cell 3</div><h2>Add the PDF converter</h2></div></div><div class="step-body"><p>Paste the <strong>entire block</strong> into a new code cell and run it. This defines the converter; it does not create a PDF yet.</p><div class="codebox"><div class="codebar"><span>Cell 3 · Define converter</span><button type="button" class="copy" aria-label="Copy Cell 3 · Define converter">Copy</button></div><pre><code id="code-converter">from nbconvert import HTMLExporter
+from playwright.async_api import async_playwright
+
+PDF_STYLE = &quot;&quot;&quot;
+@page { size: Letter portrait; margin: 0.5in; }
+html, body { height: auto !important; overflow: visible !important; }
+.jp-Notebook { width: 100% !important; padding: 0 !important; }
+.jp-Cell, .jp-InputArea, .jp-OutputArea,
+.jp-OutputArea-child, .jp-OutputArea-output {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    max-height: none !important;
+    overflow: visible !important;
+}
+pre, .highlight pre, .jp-RenderedText pre {
+    white-space: pre-wrap !important;
+    overflow-wrap: anywhere !important;
+    word-break: break-word !important;
+    max-height: none !important;
+    overflow: visible !important;
+}
+table { width: 100% !important; table-layout: fixed !important; }
+th, td { white-space: normal !important; overflow-wrap: anywhere !important; }
+img, svg { max-width: 100% !important; height: auto !important; }
+.jp-InputPrompt, .jp-OutputPrompt { min-width: 0 !important; }
+&quot;&quot;&quot;
+
+async def convert_notebook(ipynb_path, output_dir):
+    exporter = HTMLExporter(template_name=&quot;lab&quot;)
+    exporter.embed_images = True
+    html, _ = exporter.from_filename(str(ipynb_path))
+    pdf_path = output_dir / f&quot;{ipynb_path.stem}.pdf&quot;
+
+    async with async_playwright() as p:
+        browser = await p.chromium.launch(args=[&quot;--no-sandbox&quot;])
+        try:
+            page = await browser.new_page()
+            await page.set_content(html, wait_until=&quot;load&quot;, timeout=120000)
+            await page.add_style_tag(content=PDF_STYLE)
+            await page.emulate_media(media=&quot;print&quot;)
+            await page.evaluate(&quot;document.fonts.ready&quot;)
+            await page.evaluate(&quot;&quot;&quot;async () =&gt; {
+                await Promise.all(Array.from(document.images).map(img =&gt;
+                    img.complete ? Promise.resolve() : new Promise(resolve =&gt; {
+                        img.onload = resolve;
+                        img.onerror = resolve;
+                    })
+                ));
+                if (window.MathJax &amp;&amp; window.MathJax.typesetPromise) {
+                    await window.MathJax.typesetPromise();
+                }
+            }&quot;&quot;&quot;)
+            await page.pdf(
+                path=str(pdf_path),
+                format=&quot;Letter&quot;,
+                print_background=True,
+                prefer_css_page_size=True
+            )
+        finally:
+            await browser.close()
+
+    return pdf_path</code></pre></div><div class="note"><strong>No printed output is expected.</strong>When the cell finishes without a red error, continue to the next step. This version uses Colab-compatible asynchronous browser controls and wraps long code and text output.</div></div></section><section class="step" id="step-7"><div class="step-heading"><span class="step-number">07</span><div><div class=cell-tag>Conversion notebook · Cell 4</div><h2>Create your PDF</h2></div></div><div class="step-body"><p>Paste this into a new code cell and run it. Wait for the conversion to finish.</p><div class="codebox"><div class="codebar"><span>Cell 4 · Convert to PDF</span><button type="button" class="copy" aria-label="Copy Cell 4 · Convert to PDF">Copy</button></div><pre><code id="code-convert">output_dir = Path(&quot;/content/PDFs&quot;)
+output_dir.mkdir(exist_ok=True)
+converted_files = []
+
+for notebook_path in notebook_paths:
+    print(f&quot;Converting: {notebook_path.name}&quot;)
+    try:
+        pdf_path = await convert_notebook(notebook_path, output_dir)
+        converted_files.append(pdf_path)
+        print(f&quot;Saved: {pdf_path}&quot;)
+        print()
+    except Exception as error:
+        print(f&quot;FAILED: {notebook_path.name}&quot;)
+        print(error)
+        print()
+
+if not converted_files:
+    raise RuntimeError(&quot;No PDF created. Check the error above and the troubleshooting section.&quot;)
+
+print(f&quot;Done: {len(converted_files)} PDF(s). Continue to Cell 5.&quot;)</code></pre></div><div class="result"><div class="result-label">What you should see</div><pre>Converting: Lab4_EDA_Text_Reviews.ipynb
+Saved: /content/PDFs/Lab4_EDA_Text_Reviews.pdf
+
+Done: 1 PDF(s). Continue to Cell 5.</pre></div><p>A <strong>Saved:</strong> message means that file was created. A <strong>FAILED:</strong> message means that notebook needs attention; read the error before continuing.</p></div></section><section class="step" id="step-8"><div class="step-heading"><span class="step-number">08</span><div><div class=cell-tag>Conversion notebook · Cell 5</div><h2>Find and download the PDF</h2></div></div><div class="step-body"><p>The PDF is now in <strong>Colab’s runtime storage</strong>. Download it to your computer using either method below.</p><h3>Option A · Run the download cell</h3><p>Paste this into your fifth code cell and run it. It uses your actual filename, so you do not need to edit the code.</p><div class="codebox"><div class="codebar"><span>Cell 5 · Download PDF</span><button type="button" class="copy" aria-label="Copy Cell 5 · Download PDF">Copy</button></div><pre><code id="code-download">from google.colab import files
+import zipfile
+
+if not converted_files:
+    raise RuntimeError(&quot;Run Cell 4 successfully before downloading.&quot;)
+
+if len(converted_files) == 1:
+    print(f&quot;Downloading: {converted_files[0].name}&quot;)
+    files.download(str(converted_files[0]))
+else:
+    zip_path = Path(&quot;/content/PDFs.zip&quot;)
+    with zipfile.ZipFile(zip_path, &quot;w&quot;, zipfile.ZIP_DEFLATED) as archive:
+        for pdf_path in converted_files:
+            archive.write(pdf_path, arcname=pdf_path.name)
+    print(&quot;Downloading PDFs.zip. Extract it to see your PDFs.&quot;)
+    files.download(str(zip_path))</code></pre></div><p>For one notebook, your browser downloads the PDF. For multiple notebooks, it downloads <code>PDFs.zip</code>; extract the ZIP on your computer.</p><h3>Option B · Use the Files panel</h3><div class="file-route"><div class="route-label">PDF location in Colab</div><div class="route">/content/PDFs/</div><div class="route-label">Example filename</div><div class="route">Lab4_EDA_Text_Reviews.pdf</div><ol><li>Stay inside the <strong>conversion notebook</strong>, not the Colab homepage.</li><li>Click the <strong>folder icon</strong> on the far-left sidebar to open <strong>Files</strong>. If the sidebar is collapsed, expand it first.</li><li>The Files panel usually opens in <code>/content</code>. Find the <strong>PDFs</strong> folder. If it opens at the runtime root, open <strong>content</strong> first.</li><li>Expand <strong>PDFs</strong>. Click the refresh icon if the new file has not appeared.</li><li>Hover over your PDF, click <strong>⋮</strong> beside it, then choose <strong>Download</strong>.</li></ol></div><details><summary>Not sure whether a PDF exists?</summary><p>Run this optional check in a new code cell. It lists the generated PDFs and their sizes.</p><div class="codebox"><div class="codebar"><span>Optional · List generated PDFs</span><button type="button" class="copy" aria-label="Copy Optional · List generated PDFs">Copy</button></div><pre><code id="code-check">from pathlib import Path
+
+pdfs = sorted(Path(&quot;/content/PDFs&quot;).glob(&quot;*.pdf&quot;))
+if pdfs:
+    for pdf in pdfs:
+        print(f&quot;{pdf.name} — {pdf.stat().st_size:,} bytes&quot;)
+else:
+    print(&quot;No PDF found. Run Cell 4 and check for errors.&quot;)</code></pre></div></details><div class="note warning"><strong>Download before ending the session.</strong><code>/content</code> is temporary Colab storage. Files can disappear when the runtime resets or is deleted. The PDF is not automatically saved to your Google Drive. Your browser saves the download to its configured download location.</div></div></section><section class="step" id="step-9"><div class="step-heading"><span class="step-number">09</span><div><h2>Check every page, then submit</h2></div></div><div class="step-body"><p>Open the downloaded PDF on your computer. Check it from the <strong>first page to the last page</strong> before submitting.</p><ul class="checklist"><li><label><input type="checkbox"><span>All required questions, written answers, and exercises are included.</span></label></li><li><label><input type="checkbox"><span>Code, outputs, tables, and figures are visible and readable.</span></label></li><li><label><input type="checkbox"><span>No content is cut off at the right edge or hidden inside a scrolling output.</span></label></li><li><label><input type="checkbox"><span>The final section is present; the PDF does not end in the middle of an exercise.</span></label></li><li><label><input type="checkbox"><span>I am submitting the correct PDF and any additional files required by the assignment.</span></label></li></ul><div class="note"><strong>Conversion success is not a completeness check.</strong>The converter cannot recover outputs omitted from the .ipynb, rows already shortened to “…” in a displayed table, or unsaved work. Interactive charts and external images may need a static version in your assignment.</div><p>If anything is missing, return to the original assignment, fix it, run the relevant cells, save, and download a fresh .ipynb. Then repeat <strong>Cells 2, 4, and 5</strong> in the converter. Submit to Canvas according to your instructor’s requirements.</p></div></section><section class="step" id="troubleshooting"><div class="step-heading"><span class="step-number">?</span><h2>If something goes wrong</h2></div><div class="step-body"><details><summary>Chromium is missing, or its executable cannot be found</summary><p>Run the following in a new cell, then rerun <strong>Cell 4</strong>. If installation fails, check the last red error and rerun Cell 1.</p><div class="codebox"><div class="codebar"><span>Fix · Install Chromium</span><button type="button" class="copy" aria-label="Copy Fix · Install Chromium">Copy</button></div><pre><code id="code-fix">import sys
+import subprocess
+
+subprocess.run(
+    [sys.executable, &quot;-m&quot;, &quot;playwright&quot;, &quot;install&quot;,
+     &quot;--with-deps&quot;, &quot;chromium&quot;],
+    check=True
+)</code></pre></div></details><details><summary>“NameError” or a variable is not defined</summary><p>Run the cells in order. Cell 2 creates <code>notebook_paths</code>; Cell 3 defines <code>convert_notebook</code>; Cell 4 creates <code>converted_files</code>. After a runtime reset, run Cells 1–5 again and upload the notebook again.</p></details><details><summary>“Playwright Sync API inside the asyncio loop”</summary><p>Use the complete Cell 3 code in this guide. It uses <code>async_playwright</code>. Then rerun Cell 4, including the <code>await</code> keyword. Do not mix it with an older synchronous browser test.</p></details><details><summary>The PDF folder is empty, or the download does not start</summary><p>Check Cell 4 for a <strong>Saved:</strong> message and run the optional file check in Step 8. If the PDF exists, use <strong>Files → PDFs → ⋮ → Download</strong>. Check your browser’s downloads list and allow the download if prompted.</p></details><details><summary>Code, tables, or figures are missing or too wide</summary><p>Inspect the original notebook and the newly downloaded .ipynb. Save outputs and re-export. For a very wide table, show fewer columns at a time or split it into several tables before saving. Expand truncated output and replace interactive figures with static images when necessary. Check the new PDF again.</p></details><details><summary>The installation fails or the runtime disconnects</summary><p>Read the final error in Cell 1. Reconnect, then rerun installation. If packages still fail to load after installation, use <strong>Runtime → Restart session</strong>, then run Cells 1–5 in order. If the runtime was reset or deleted, upload your assignment again.</p></details></div></section><footer>Reference documentation: <a href="https://nbconvert.readthedocs.io/en/latest/api/exporters.html" target="_blank" rel="noopener noreferrer">Jupyter nbconvert</a><a href="https://playwright.dev/python/docs/api/class-page#page-pdf" target="_blank" rel="noopener noreferrer">Playwright PDF export</a><p>Use your instructor’s assignment instructions for required submission formats.</p></footer></main><div id="copy-status" class="sr-only" role="status" aria-live="polite"></div></body></html>
